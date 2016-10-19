@@ -17,8 +17,16 @@
 //
 int tm_handle_sensor()
 {
-	int rc;
+	//int rc;
 	char data;
+
+	i2c_read(0x90, 0, 0, &data, 1);
+
+	if ((int)data < 0|| (int)data > 99)
+		data = 0;
+	else {
+		tm_update_average((int)data);
+	}
 
 	return -1;
 }
