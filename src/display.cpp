@@ -104,9 +104,36 @@ int disp_on(int alloff)
  *
  ************************************************************************/
 
+int msg_index = 0;
+
+char* table;
+
+static char disp_msg_up[4]={0, 0, 28, 115
+	/*0x00001C73, 28, 115
+	0x001C7300,
+	0x1C730000,
+	0x7300001C*/
+};
+
+static char disp_msg_down[4] = { 0x5E, 0x5C, 0x7E, 0x54
+	/*0x5E5C8254, 94, 92, 130, 84
+	0x5C82545E,
+	0x82545E5C,
+	0x545E5C82*/
+};
+
+static char disp_msg_same[4] = { 0x6D, 0x77, 0x37, 0x79
+	/*0x6D773779, 109, 119, 55, 121
+	0x7737796D,
+	0x37796D77,
+	0x796D7737*/
+};
+
 void rotate_message_left()
 {
-
+	msg_index++;
+	if (msg_index > 3)
+		msg_index = 0;
 }
 
 //
@@ -116,8 +143,37 @@ void rotate_message_left()
 //   - DISP_MSG_UP
 // if message is same as previous then rotate left
 //
+display_message_t prev_message = DISP_MSG_FIRST;
 int disp_show_message(display_message_t message)
 {
+	bool invalid = false;
+
+	if (message == prev_message) {
+		rotate_message_left();
+	} else if (message == DISP_MSG_DOWN) {
+		table = disp_msg_down;
+		msg_index = 0;
+	} else if (message == DISP_MSG_UP) {
+		table = disp_msg_up;
+		msg_index = 0;
+	} else if (message == DISP_MSG_SAME) {
+		table = disp_msg_same;
+		msg_index = 0;
+	} else {
+		invalid = true;
+	}
+
+	if (!invalid) {
+		disp_msg_data[1] = table[msg_index];
+		disp_msg_data[3] = table[(msg_index+1) % 4];
+		disp_msg_data[7] = table[(msg_index+2) % 4];
+		disp_msg_data[9] = table[(msg_index+3) % 4];
+
+		prev_message = message;
+	} else {
+		disp_reset(0);
+	}
+
 	const int addr = HW_I2C_ADDR_HT16K33;
 	return i2c_write( addr, disp_msg_data,10 );
 }

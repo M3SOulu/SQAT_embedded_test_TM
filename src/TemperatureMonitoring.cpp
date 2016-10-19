@@ -50,6 +50,7 @@ int main(void)
 	 * TODO: Oscar to remove until here (was in the original)
 	 */
 	while( 1 ){
+		delay_1s();
 		/**
 		 * TODO: Oscar to remove this (was in the original)
 		 */

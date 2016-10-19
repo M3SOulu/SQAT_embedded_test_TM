@@ -98,14 +98,14 @@ TEST_F( unittest_TM, reset_data_zeroes_table )
 {
 	TM_test_namespace::tm_reset_data();
 
-	EXPECT_EQ( -1, TM_test_namespace::tm_get_temperature(0) );
-	EXPECT_EQ( -1, TM_test_namespace::tm_get_temperature(1) );
-	EXPECT_EQ( -1, TM_test_namespace::tm_get_temperature(2) );
-	EXPECT_EQ( -1, TM_test_namespace::tm_get_temperature(3) );
-	EXPECT_EQ( -1, TM_test_namespace::tm_get_temperature(4) );
-	EXPECT_EQ( -1, TM_test_namespace::tm_get_temperature(5) );
-	EXPECT_EQ( -1, TM_test_namespace::tm_get_temperature(6) );
-	EXPECT_EQ( -1, TM_test_namespace::tm_get_temperature(7) );
+	EXPECT_EQ( 0, TM_test_namespace::tm_get_temperature(0) );
+	EXPECT_EQ( 0, TM_test_namespace::tm_get_temperature(1) );
+	EXPECT_EQ( 0, TM_test_namespace::tm_get_temperature(2) );
+	EXPECT_EQ( 0, TM_test_namespace::tm_get_temperature(3) );
+	EXPECT_EQ( 0, TM_test_namespace::tm_get_temperature(4) );
+	EXPECT_EQ( 0, TM_test_namespace::tm_get_temperature(5) );
+	EXPECT_EQ( 0, TM_test_namespace::tm_get_temperature(6) );
+	EXPECT_EQ( 0, TM_test_namespace::tm_get_temperature(7) );
 }
 
 //
