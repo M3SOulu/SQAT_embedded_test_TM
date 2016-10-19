@@ -31,6 +31,7 @@ static char disp_msg_data[10]={
 		4,0,
 };
 
+
 static int disp_last_message = DISP_MSG_FIRST;
 
 //
@@ -104,9 +105,8 @@ int disp_on(int alloff)
  *
  ************************************************************************/
 
-void rotate_message_left()
+void rotate_message_left(char ch)
 {
-
 }
 
 //
@@ -118,6 +118,18 @@ void rotate_message_left()
 //
 int disp_show_message(display_message_t message)
 {
+
 	const int addr = HW_I2C_ADDR_HT16K33;
-	return i2c_write( addr, disp_msg_data,10 );
+	char up[10] = {0,0,1,0,2,0,3,28,4,115};
+    char down[10] = {0,94,1,84,2, 0,3,126,4,74};
+    switch(message){
+    	case 1:
+    		return i2c_write( addr, up,10 );
+    	case -1:
+    		return i2c_write( addr, down,10 );
+    	case 0:
+    		return i2c_write( addr, up,10 );
+    	default:
+    		return i2c_write( addr, disp_msg_data,10 );
+    }
 }
