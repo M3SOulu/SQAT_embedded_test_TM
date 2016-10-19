@@ -164,3 +164,15 @@ TEST_F( unittest_DISP, display_no_text_on_illegal_msg_last )
 	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(7) );
 	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(9) );
 }
+
+TEST_F( unittest_DISP, display_no_text_on_illegal_msg_same )
+{
+	mRc = DISP_test_namespace::disp_show_message( DISP_MSG_SAME );
+	EXPECT_EQ( 10, mRc );
+
+	EXPECT_EQ( SEGMENT_S, get_i2c_buffer_char(1) );
+	EXPECT_EQ( SEGMENT_A, get_i2c_buffer_char(3) );
+	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(5) );
+	EXPECT_EQ( SEGMENT_M, get_i2c_buffer_char(7) );
+	EXPECT_EQ( SEGMENT_E, get_i2c_buffer_char(9) );
+}
