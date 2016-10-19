@@ -106,7 +106,20 @@ int disp_on(int alloff)
 
 void rotate_message_left()
 {
+	char tmp[4] = {
+			disp_msg_data[1],
+			disp_msg_data[3],
+			disp_msg_data[7],
+			disp_msg_data[9]
+	};
 
+	disp_msg_data[1] = tmp[1];
+	disp_msg_data[3] = tmp[2];
+	disp_msg_data[7] = tmp[3];
+	disp_msg_data[9] = tmp[0];
+
+	const int addr = HW_I2C_ADDR_HT16K33;
+	i2c_write( addr, disp_msg_data,10 );
 }
 
 //
@@ -118,6 +131,49 @@ void rotate_message_left()
 //
 int disp_show_message(display_message_t message)
 {
+	// Maybe store these messages to arrays later
+	switch (message) {
+	case DISP_MSG_FIRST:
+		disp_msg_data[1] = SEGMENT_NONE;
+		disp_msg_data[3] = SEGMENT_NONE;
+		disp_msg_data[5] = SEGMENT_NONE;
+		disp_msg_data[7] = SEGMENT_NONE;
+		disp_msg_data[9] = SEGMENT_NONE;
+		break;
+
+	case DISP_MSG_DOWN:
+		disp_msg_data[1] = SEGMENT_d;
+		disp_msg_data[3] = SEGMENT_o;
+		disp_msg_data[5] = SEGMENT_NONE;
+		disp_msg_data[7] = SEGMENT_w;
+		disp_msg_data[9] = SEGMENT_n;
+		break;
+
+	case DISP_MSG_SAME:
+		disp_msg_data[1] = SEGMENT_s;
+		disp_msg_data[3] = SEGMENT_A;
+		disp_msg_data[5] = SEGMENT_NONE;
+		disp_msg_data[7] = SEGMENT_m;
+		disp_msg_data[9] = SEGMENT_E;
+		break;
+
+	case DISP_MSG_UP:
+		disp_msg_data[1] = SEGMENT_NONE;
+		disp_msg_data[3] = SEGMENT_NONE;
+		disp_msg_data[5] = SEGMENT_NONE;
+		disp_msg_data[7] = SEGMENT_u;
+		disp_msg_data[9] = SEGMENT_P;
+		break;
+
+	case DISP_MSG_LAST:
+		disp_msg_data[1] = SEGMENT_NONE;
+		disp_msg_data[3] = SEGMENT_NONE;
+		disp_msg_data[5] = SEGMENT_NONE;
+		disp_msg_data[7] = SEGMENT_NONE;
+		disp_msg_data[9] = SEGMENT_NONE;
+		break;
+	}
+
 	const int addr = HW_I2C_ADDR_HT16K33;
 	return i2c_write( addr, disp_msg_data,10 );
 }

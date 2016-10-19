@@ -109,18 +109,6 @@ TEST_F( unittest_TM, reset_data_zeroes_table )
 }
 
 //
-// bad test but matches the empty implemementation
-//
-TEST_F(unittest_TM, average_is_updated_correctly )
-{
-	TM_test_namespace::tm_reset_data();
-
-	TM_test_namespace::tm_update_average( 80 );
-
-	EXPECT_EQ( -1, TM_test_namespace::tm_get_average() );
-}
-
-//
 // bad name for test
 //
 TEST_F( unittest_TM, tend_is_correct_case_1 )
@@ -139,4 +127,57 @@ TEST_F( unittest_TM, tend_is_correct_case_1 )
 	display_message_t trend = TM_test_namespace::tm_get_trend();
 	EXPECT_EQ( DISP_MSG_SAME, trend );
 
+}
+
+TEST_F( unittest_TM, correct_average_1_value )
+{
+	TM_test_namespace::tm_reset_data();
+	TM_test_namespace::tm_update_average( 8 );
+
+	int average = TM_test_namespace::tm_get_average();
+	EXPECT_EQ( 8, average );
+}
+
+TEST_F( unittest_TM, correct_average_3_values )
+{
+	TM_test_namespace::tm_reset_data();
+	TM_test_namespace::tm_update_average( 80 );
+	TM_test_namespace::tm_update_average( 123 );
+	TM_test_namespace::tm_update_average( -55 );
+
+	int average = TM_test_namespace::tm_get_average();
+	EXPECT_EQ( 49, average );
+}
+
+TEST_F( unittest_TM, correct_average_8_values )
+{
+	TM_test_namespace::tm_reset_data();
+	TM_test_namespace::tm_update_average( 80 );
+	TM_test_namespace::tm_update_average( 123 );
+	TM_test_namespace::tm_update_average( -55 );
+	TM_test_namespace::tm_update_average( 115 );
+	TM_test_namespace::tm_update_average( 35 );
+	TM_test_namespace::tm_update_average( 0 );
+	TM_test_namespace::tm_update_average( 23 );
+	TM_test_namespace::tm_update_average( 29 );
+
+	int average = TM_test_namespace::tm_get_average();
+	EXPECT_EQ( 43, average );
+}
+
+TEST_F( unittest_TM, correct_average_9_values )
+{
+	TM_test_namespace::tm_reset_data();
+	TM_test_namespace::tm_update_average( 80 );
+	TM_test_namespace::tm_update_average( 123 );
+	TM_test_namespace::tm_update_average( -55 );
+	TM_test_namespace::tm_update_average( 115 );
+	TM_test_namespace::tm_update_average( 35 );
+	TM_test_namespace::tm_update_average( 0 );
+	TM_test_namespace::tm_update_average( 23 );
+	TM_test_namespace::tm_update_average( 29 );
+	TM_test_namespace::tm_update_average( -82 );
+
+	int average = TM_test_namespace::tm_get_average();
+	EXPECT_EQ( 23, average );
 }

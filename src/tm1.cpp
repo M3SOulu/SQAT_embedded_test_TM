@@ -37,6 +37,8 @@ int temp_old_sum = 0;
 int temp_prev_average=0;
 int temp_current_average=0;
 
+int valid_temperature_count = 0;
+
 display_message_t temp_trend = DISP_MSG_SAME;
 
 //
@@ -44,6 +46,19 @@ display_message_t temp_trend = DISP_MSG_SAME;
 //
 void tm_reset_data()
 {
+	temp_index=0;
+
+	temp_sum=0;
+	temp_old_sum = 0;
+
+	temp_prev_average=0;
+	temp_current_average=0;
+
+	valid_temperature_count = 0;
+
+	for (int i = 0; i < TEMP_BUFFER; i++) {
+		temperatures[i] = -1;
+	}
 }
 
 //
@@ -51,13 +66,30 @@ void tm_reset_data()
 //
 void tm_update_average(int temp)
 {
+	temp_old_sum = temp_sum;
+
+	if (temp_index == TEMP_BUFFER) {
+		temp_index = 0;
+		temp_sum -= temperatures[temp_index];
+	}
+
+	temperatures[temp_index++] = temp;
+
+	temp_sum += temp;
+
+	if (valid_temperature_count < TEMP_BUFFER)
+		++valid_temperature_count;
+
+	temp_prev_average = temp_current_average;
+	temp_current_average = temp_sum / valid_temperature_count;
 }
+
 //
 // return the average
 //
 int tm_get_average()
 {
-	return -1;
+	return temp_current_average;
 }
 //
 // get the current trend value
