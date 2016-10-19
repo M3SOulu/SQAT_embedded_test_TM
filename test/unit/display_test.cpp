@@ -1,9 +1,3 @@
-/*
- * display_test.cpp
- *
- *  Created on: Apr 9, 2016
- *      Author: timppa
- */
 
 #include "gtest_inc.h"
 
@@ -140,7 +134,6 @@ TEST_F( unittest_DISP, test_constructor )
  * test cases: these are examples
  *
  **********************************************************************/
-
 TEST_F( unittest_DISP, display_no_text_on_illegal_msg_first )
 {
 	mRc = DISP_test_namespace::disp_show_message( DISP_MSG_FIRST );
@@ -163,4 +156,34 @@ TEST_F( unittest_DISP, display_no_text_on_illegal_msg_last )
 	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(5) );
 	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(7) );
 	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(9) );
+}
+TEST_F( unittest_DISP, display_show_up)
+{
+	mRc = DISP_test_namespace::disp_show_message( DISP_MSG_UP );
+	EXPECT_EQ( 10, mRc );
+	EXPECT_EQ( 0, get_i2c_buffer_char(1) );
+	EXPECT_EQ( 0, get_i2c_buffer_char(3) );
+	EXPECT_EQ( 0, get_i2c_buffer_char(5) );
+	EXPECT_EQ( 28 ,get_i2c_buffer_char(7) );
+	EXPECT_EQ( 115, get_i2c_buffer_char(9) );
+}
+TEST_F( unittest_DISP, display_show_down)
+{
+	mRc = DISP_test_namespace::disp_show_message( DISP_MSG_DOWN );
+	EXPECT_EQ( 10, mRc );
+	EXPECT_EQ( 94, get_i2c_buffer_char(1) );
+	EXPECT_EQ( 84, get_i2c_buffer_char(3) );
+	EXPECT_EQ( 0, get_i2c_buffer_char(5) );
+	EXPECT_EQ( 126 ,get_i2c_buffer_char(7) );
+	EXPECT_EQ( 74, get_i2c_buffer_char(9) );
+}
+TEST_F( unittest_DISP, display_show_left)
+{
+	mRc = DISP_test_namespace::disp_show_message( DISP_MSG_SAME );
+	EXPECT_EQ( 10, mRc );
+	EXPECT_EQ( 84, get_i2c_buffer_char(1) );
+	EXPECT_EQ( 126, get_i2c_buffer_char(3) );
+	EXPECT_EQ( 0, get_i2c_buffer_char(5) );
+	EXPECT_EQ( 74 ,get_i2c_buffer_char(7) );
+	EXPECT_EQ( 94, get_i2c_buffer_char(9) );
 }
