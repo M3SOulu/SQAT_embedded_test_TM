@@ -18,8 +18,19 @@
 #define SEGMENT_NONE 0
 #define SEGMENT_ALL  0xFF
 
-#define SEGMENT_0    63
-#define SEGMENT_1     6
+#define SEGMENT_0    0b11111100
+#define SEGMENT_1    0b01100000
+#define SEGMENT_u    0b00111000
+#define SEGMENT_P    0b11001110
+#define SEGMENT_A    0b11101110
+#define SEGMENT_E    0b10011110
+#define SEGMENT_d    0b01111010
+#define SEGMENT_n    0b00101010
+#define SEGMENT_m    0b11101100
+#define SEGMENT_o    0b00111010
+#define SEGMENT_P    0b11001110
+#define SEGMENT_s    0b10110110
+#define SEGMENT_w    0b01111110
 
 int disp_off();
 int disp_on(int alloff);
