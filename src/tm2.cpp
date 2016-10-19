@@ -20,5 +20,7 @@ int tm_handle_sensor()
 	int rc;
 	char data;
 
-	return -1;
+	i2c_read(0x90, 0, 0, &data, 1);
+
+	return data;
 }

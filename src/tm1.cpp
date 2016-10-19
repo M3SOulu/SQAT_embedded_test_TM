@@ -51,18 +51,42 @@ void tm_reset_data()
 //
 void tm_update_average(int temp)
 {
+	int average = 0;
+	int i;
+	for (i = 0; i < TEMP_BUFFER; i++) {
+		if(i < 7) {
+			temperatures[i] = temperatures[i + 1];
+
+		} else {
+			temperatures[i] = temp;
+		}
+		average += temperatures[i];
+	}
+	temp_old_sum = temp_sum;
+	temp_sum = average;
+
+	average = average / TEMP_BUFFER;
+
+	temp_prev_average = temp_current_average;
+	temp_current_average = average;
 }
 //
 // return the average
 //
 int tm_get_average()
 {
-	return -1;
+	return temp_current_average;
 }
 //
 // get the current trend value
 //
 display_message_t tm_get_trend()
 {
-	return DISP_MSG_SAME; // default
+	if(temp_current_average == temp_prev_average) {
+		return DISP_MSG_SAME; // default
+	} else if(temp_current_average > temp_prev_average) {
+		return DISP_MSG_UP; // default
+	} else {
+		return DISP_MSG_DOWN; // default
+	}
 }
