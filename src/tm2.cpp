@@ -17,8 +17,8 @@
 //
 int tm_handle_sensor()
 {
-	int rc;
-	char data;
+	//int rc;
+	//char data;
 
 	return -1;
 }
