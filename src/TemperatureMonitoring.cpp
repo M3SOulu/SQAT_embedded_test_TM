@@ -40,12 +40,12 @@ int main(void)
 	/**
 	 * TODO: Oscar to remove this (was in the original)
 	 */
-	int i;
-	for( i=0; i<9; i++){
-		tm_handle_sensor();
-	}
-	display_message_t trend = tm_get_trend();
-	disp_show_message( trend );
+	//int i;
+	//for( i=0; i<9; i++){
+	//	tm_handle_sensor();
+	//}
+	//display_message_t trend = tm_get_trend();
+	//disp_show_message( trend );
 	/**
 	 * TODO: Oscar to remove until here (was in the original)
 	 */
@@ -54,7 +54,7 @@ int main(void)
 		 * TODO: Oscar to remove this (was in the original)
 		 */
 		tm_handle_sensor();
-		trend = tm_get_trend();
+		display_message_t trend = tm_get_trend();
 		disp_show_message( trend );
 		/**
 		 * TODO: Oscar to remove until here (was in the original)
