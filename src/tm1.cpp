@@ -44,6 +44,7 @@ display_message_t temp_trend = DISP_MSG_SAME;
 //
 void tm_reset_data()
 {
+
 }
 
 //

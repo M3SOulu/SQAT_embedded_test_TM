@@ -21,4 +21,67 @@
 #pragma GCC diagnostic pop
 #endif
 
+TEST_F(LPC_SWM,swm_is_not_initialized_if_SYSCON_param_is_null){
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	Expect_EQ("same",trend);
+}
+
+TEST_F(LPC_SWM,swm_is_not_initialized_if_SYSCON_param_is_null){
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	Expect_EQ("ames",trend);
+}
+
+TEST_F(LPC_SWM,swm_is_not_initialized_if_SYSCON_param_is_null){
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	Expect_EQ("mesa",trend);
+}
+
+TEST_F(LPC_SWM,swm_is_not_initialized_if_SYSCON_param_is_null){
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	Expect_EQ("esam",trend);
+}
+
+TEST_F(LPC_SWM,swm_is_not_initialized_if_SYSCON_param_is_null){
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	Expect_EQ("up",trend);
+}
+
+TEST_F(LPC_SWM,swm_is_not_initialized_if_SYSCON_param_is_null){
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	Expect_EQ("pu",trend);
+}
+
+TEST_F(LPC_SWM,swm_is_not_initialized_if_SYSCON_param_is_null){
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	Expect_EQ("down",trend);
+}
+
+TEST_F(LPC_SWM,swm_is_not_initialized_if_SYSCON_param_is_null){
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	Expect_EQ("ownd",trend);
+}
+
+TEST_F(LPC_SWM,swm_is_not_initialized_if_SYSCON_param_is_null){
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	Expect_EQ("wndo",trend);
+}
+
+TEST_F(LPC_SWM,swm_is_not_initialized_if_SYSCON_param_is_null){
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	trend = SWM_LPC::i2c_write(1,LPC_SWM);
+	Expect_EQ("ndow",trend);
+}
+
 #endif /* TEST_GTEST_INC_H_ */

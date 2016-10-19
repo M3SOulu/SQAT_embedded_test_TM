@@ -106,7 +106,12 @@ int disp_on(int alloff)
 
 void rotate_message_left()
 {
-
+	if (rc>0){
+		index--;
+		if (index<0){
+			index += index+get.length();
+		}
+	}
 }
 
 //
