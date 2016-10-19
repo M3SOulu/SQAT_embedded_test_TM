@@ -106,7 +106,11 @@ int disp_on(int alloff)
 
 void rotate_message_left()
 {
-
+	char tmp_disp_msg_data_1 = disp_msg_data[1];
+	disp_msg_data[1] = disp_msg_data[3];
+	disp_msg_data[3] = disp_msg_data[7];
+	disp_msg_data[7] = disp_msg_data[9];
+	disp_msg_data[9] = tmp_disp_msg_data_1;
 }
 
 //
@@ -119,5 +123,31 @@ void rotate_message_left()
 int disp_show_message(display_message_t message)
 {
 	const int addr = HW_I2C_ADDR_HT16K33;
+
+	switch (message) {
+	case DISP_MSG_UP:
+		disp_msg_data[1] = SEGMENTS_NONE;
+		disp_msg_data[3] = SEGMENTS_NONE;
+		disp_msg_data[5] = SEGMENTS_NONE;
+		disp_msg_data[7] = SEGMENT_U;
+		disp_msg_data[9] = SEGMENT_P;
+		break;
+	case DISP_MSG_DOWN:
+		disp_msg_data[1] = SEGMENT_D;
+		disp_msg_data[3] = SEGMENT_O;
+		disp_msg_data[5] = SEGMENTS_NONE;
+		disp_msg_data[7] = SEGMENT_W;
+		disp_msg_data[9] = SEGMENT_N;
+		break;
+	 case DISP_MSG_SAME:
+		disp_msg_data[1] = SEGMENT_S;
+		disp_msg_data[3] = SEGMENT_A;
+		disp_msg_data[5] = SEGMENTS_NONE;
+		disp_msg_data[7] = SEGMENT_M;
+		disp_msg_data[9] = SEGMENT_E;
+		break;
+
+	}
+
 	return i2c_write( addr, disp_msg_data,10 );
 }
