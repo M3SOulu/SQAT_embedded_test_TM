@@ -119,5 +119,24 @@ void rotate_message_left()
 int disp_show_message(display_message_t message)
 {
 	const int addr = HW_I2C_ADDR_HT16K33;
+	if(message==DISP_MSG_DOWN ){
+		disp_msg_data[9] = 84;
+		disp_msg_data[7] = 126;
+		disp_msg_data[3] = 92;
+		disp_msg_data[1] = 94;
+	}
+	else if(message==DISP_MSG_SAME ){
+		disp_msg_data[9] = 121;
+		disp_msg_data[7] = 55;
+		disp_msg_data[3] = 119;
+		disp_msg_data[1] = 109;
+	}
+	else if(message==DISP_MSG_UP ){
+		disp_msg_data[9] = 115;
+		disp_msg_data[7] = 62;
+		disp_msg_data[3] = 0;
+		disp_msg_data[1] = 0;
+	}
+
 	return i2c_write( addr, disp_msg_data,10 );
 }

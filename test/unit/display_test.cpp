@@ -17,6 +17,7 @@ namespace DISP_test_namespace {
 	//   in use (and not the real)
 	//
 	int i2c_write(int address,const char* buffer,int length);
+
 	//
 	// delay dependency
 	//
@@ -82,7 +83,9 @@ protected:
 	//   to access the variables used to record the parameters
 	//
 	friend int DISP_test_namespace::i2c_write(int address,const char* buffer,int length);
+
 	friend void DISP_test_namespace::delay();
+
 	static char mI2C_record_write_buffer[10];
 	static int mI2C_record_write_address;
 	static int mI2C_record_write_length;
@@ -107,6 +110,8 @@ int DISP_test_namespace::i2c_write(int address,const char* buffer,int length)
 	unittest_DISP::mI2C_record_write_length = length;
 	return length;
 }
+
+
 
 void DISP_test_namespace::delay()
 {
@@ -153,14 +158,36 @@ TEST_F( unittest_DISP, display_no_text_on_illegal_msg_first )
 	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(9) );
 }
 
-TEST_F( unittest_DISP, display_no_text_on_illegal_msg_last )
+TEST_F( unittest_DISP, display_text_down)
 {
-	mRc = DISP_test_namespace::disp_show_message( DISP_MSG_LAST );
+	mRc = DISP_test_namespace::disp_show_message( DISP_MSG_DOWN);
 	EXPECT_EQ( 10, mRc );
 
-	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(1) );
-	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(3) );
-	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(5) );
-	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(7) );
-	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(9) );
+	EXPECT_EQ( 94, get_i2c_buffer_char(1) );
+	EXPECT_EQ( 92, get_i2c_buffer_char(3) );
+	EXPECT_EQ( 0, get_i2c_buffer_char(5) );
+	EXPECT_EQ( 126, get_i2c_buffer_char(7) );
+	EXPECT_EQ( 84, get_i2c_buffer_char(9) );
+}
+TEST_F( unittest_DISP, display_text_same)
+{
+	mRc = DISP_test_namespace::disp_show_message( DISP_MSG_SAME);
+	EXPECT_EQ( 10, mRc );
+
+	EXPECT_EQ( 109, get_i2c_buffer_char(1) );
+	EXPECT_EQ( 119, get_i2c_buffer_char(3) );
+	EXPECT_EQ( 0, get_i2c_buffer_char(5) );
+	EXPECT_EQ( 55, get_i2c_buffer_char(7) );
+	EXPECT_EQ( 121, get_i2c_buffer_char(9) );
+}
+TEST_F( unittest_DISP, display_text_up)
+{
+	mRc = DISP_test_namespace::disp_show_message( DISP_MSG_UP);
+	EXPECT_EQ( 10, mRc );
+
+	EXPECT_EQ( 0, get_i2c_buffer_char(1) );
+	EXPECT_EQ( 0, get_i2c_buffer_char(3) );
+	EXPECT_EQ( 0, get_i2c_buffer_char(5) );
+	EXPECT_EQ( 62, get_i2c_buffer_char(7) );
+	EXPECT_EQ( 115, get_i2c_buffer_char(9) );
 }
