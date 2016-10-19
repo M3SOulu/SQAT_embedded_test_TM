@@ -121,9 +121,9 @@ TEST_F(unittest_TM, average_is_updated_correctly )
 }
 
 //
-// bad name for test
+// bad name for test //
 //
-TEST_F( unittest_TM, tend_is_correct_case_1 )
+TEST_F( unittest_TM, trend_is_correct_case_1 )
 {
 	TM_test_namespace::tm_reset_data();
 	TM_test_namespace::tm_update_average( 80 );	// 1
