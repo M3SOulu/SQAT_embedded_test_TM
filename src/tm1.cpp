@@ -44,6 +44,9 @@ display_message_t temp_trend = DISP_MSG_SAME;
 //
 void tm_reset_data()
 {
+	for (int i=0; i<7; i++) {
+		temperatures[i] = 0;
+	}
 }
 
 //
@@ -51,18 +54,28 @@ void tm_reset_data()
 //
 void tm_update_average(int temp)
 {
+	for (int i=0; i<7; i++) {
+		temperatures[i] = temperatures[i+1];
+	}
+	temperatures[7] = temp;
 }
 //
 // return the average
 //
 int tm_get_average()
 {
-	return -1;
+	return temp_current_average;
 }
 //
 // get the current trend value
 //
 display_message_t tm_get_trend()
 {
+	int temp_diff = temp_current_average - temp_prev_average;
+	if (temp_diff > 0) {
+		return DISP_MSG_UP;
+	} else if (temp_diff < 0) {
+		return DISP_MSG_DOWN;
+	}
 	return DISP_MSG_SAME; // default
 }

@@ -21,6 +21,19 @@
 #define SEGMENT_0    63
 #define SEGMENT_1     6
 
+
+#define SEGMENT_U     28
+#define SEGMENT_P     115
+#define SEGMENT_D	  94
+#define SEGMENT_O	  92
+#define SEGMENT_W	  127
+#define SEGMENT_N	  84
+#define SEGMENT_S	  109
+#define SEGMENT_A	  119
+#define SEGMENT_M	  55
+#define SEGMENT_E	  221
+
+
 int disp_off();
 int disp_on(int alloff);
 void disp_reset(int alloff);

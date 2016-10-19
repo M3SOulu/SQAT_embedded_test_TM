@@ -164,3 +164,54 @@ TEST_F( unittest_DISP, display_no_text_on_illegal_msg_last )
 	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(7) );
 	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(9) );
 }
+
+TEST_F( unittest_DISP, display_up)
+{
+	mRc = DISP_test_namespace::disp_show_message( DISP_MSG_UP );
+	EXPECT_EQ( 10, mRc );
+
+	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(1) );
+	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(3) );
+	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(5) );
+	EXPECT_EQ( SEGMENT_U   , get_i2c_buffer_char(7) );
+	EXPECT_EQ( SEGMENT_P   , get_i2c_buffer_char(9) );
+}
+
+TEST_F( unittest_DISP, display_down)
+{
+	mRc = DISP_test_namespace::disp_show_message( DISP_MSG_DOWN );
+	EXPECT_EQ( 10, mRc );
+
+	EXPECT_EQ( SEGMENT_D, get_i2c_buffer_char(1) );
+	EXPECT_EQ( SEGMENT_O, get_i2c_buffer_char(3) );
+	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(5) );
+	EXPECT_EQ( SEGMENT_W, get_i2c_buffer_char(7) );
+	EXPECT_EQ( SEGMENT_N, get_i2c_buffer_char(9) );
+}
+
+TEST_F( unittest_DISP, display_same)
+{
+	mRc = DISP_test_namespace::disp_show_message( DISP_MSG_SAME );
+	EXPECT_EQ( 10, mRc );
+
+	EXPECT_EQ( SEGMENT_S, get_i2c_buffer_char(1) );
+	EXPECT_EQ( SEGMENT_A, get_i2c_buffer_char(3) );
+	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(5) );
+	EXPECT_EQ( SEGMENT_M, get_i2c_buffer_char(7) );
+	EXPECT_EQ( SEGMENT_E, get_i2c_buffer_char(9) );
+}
+
+
+TEST_F( unittest_DISP, display_rotate_down_once)
+{
+	mRc = DISP_test_namespace::disp_show_message( DISP_MSG_DOWN );
+	EXPECT_EQ( 10, mRc );
+
+	DISP_test_namespace::rotate_message_left();
+
+	EXPECT_EQ( SEGMENT_O, get_i2c_buffer_char(1) );
+	EXPECT_EQ( SEGMENT_W, get_i2c_buffer_char(3) );
+	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(5) );
+	EXPECT_EQ( SEGMENT_N, get_i2c_buffer_char(7) );
+	EXPECT_EQ( SEGMENT_D, get_i2c_buffer_char(9) );
+}
