@@ -164,3 +164,4 @@ TEST_F( unittest_DISP, display_no_text_on_illegal_msg_last )
 	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(7) );
 	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(9) );
 }
+
