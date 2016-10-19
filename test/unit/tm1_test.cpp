@@ -140,3 +140,21 @@ TEST_F( unittest_TM, tend_is_correct_case_1 )
 	EXPECT_EQ( DISP_MSG_SAME, trend );
 
 }
+
+TEST_F( unittest_TM, trend_goes_down )
+{
+	TM_test_namespace::tm_reset_data();
+	TM_test_namespace::tm_update_average( 80 );	// 1
+	TM_test_namespace::tm_update_average( 79 );
+	TM_test_namespace::tm_update_average( 78 ); // 3
+	TM_test_namespace::tm_update_average( 77 );
+	TM_test_namespace::tm_update_average( 76 ); // 5
+	TM_test_namespace::tm_update_average( 65 );
+	TM_test_namespace::tm_update_average( 50 ); // 7
+	TM_test_namespace::tm_update_average( 30 );
+	TM_test_namespace::tm_update_average( 10 ); // 9
+
+	display_message_t trend = TM_test_namespace::tm_get_trend();
+	EXPECT_EQ( DISP_MSG_DOWN, trend );
+
+}
