@@ -164,3 +164,13 @@ TEST_F( unittest_DISP, display_no_text_on_illegal_msg_last )
 	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(7) );
 	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(9) );
 }
+
+
+TEST_F( unittest_DISP, check_rotation_of_message )
+{
+	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(1) );
+	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(3) );
+	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(5) );
+	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(7) );
+	EXPECT_EQ( SEGMENT_NONE, get_i2c_buffer_char(9) );
+}

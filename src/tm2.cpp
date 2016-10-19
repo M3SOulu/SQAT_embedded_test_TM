@@ -12,6 +12,7 @@
 
 #include "tm.h"
 
+static char disp_msg_data[10] = { 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, };
 //
 // get temperature from i2c sensor
 //
@@ -19,6 +20,5 @@ int tm_handle_sensor()
 {
 	int rc;
 	char data;
-
-	return -1;
+	return i2c_read(0x90, 0, 0, disp_msg_data, 1);
 }

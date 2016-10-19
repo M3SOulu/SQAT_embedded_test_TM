@@ -209,13 +209,13 @@ TEST_F( unittest_TM2, reads_temperature_from_i2c )
 
 	int temperature = TM2_test_namespace::tm_handle_sensor();
 
-	EXPECT_EQ( -1, temperature );
+	EXPECT_EQ( 1, temperature );
 	EXPECT_EQ( 0, mRecord_i2c_addr );
 	EXPECT_EQ( 0, get_temp_value_at_index(0) );
 
 	temperature = TM2_test_namespace::tm_handle_sensor();
 
-	EXPECT_EQ( -1, temperature );
+	EXPECT_EQ( 1, temperature );
 	EXPECT_EQ( 0, mRecord_i2c_addr );
 	EXPECT_EQ( 0, get_temp_value_at_index(1) );
 }
