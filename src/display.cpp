@@ -106,13 +106,20 @@ int disp_on(int alloff)
 
 void rotate_message_left()
 {
+	char tmp[4] = {
+		disp_msg_data[1],
+		disp_msg_data[3],
+		disp_msg_data[7],
+		disp_msg_data[9]
+	};
+
+	disp_msg_data[1] = tmp[1];
+	disp_msg_data[3] = tmp[2];
+	disp_msg_data[7] = tmp[3];
+	disp_msg_data[9] = tmp[0];
+
 	const int addr = HW_I2C_ADDR_HT16K33;
-		disp_msg_data[1] = 107;
-		disp_msg_data[3] = 107;
-		disp_msg_data[5] = 0;
-		disp_msg_data[7] = 107;
-		disp_msg_data[9] = 107;
-	i2c_write(addr, disp_msg_data, 10);
+	i2c_write( addr, disp_msg_data,10 );
 }
 
 //
